@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
 
-const API_URL = "http://www.omdbapi.com?apikey=561bc012";
+const API_URL = "https://www.omdbapi.com?apikey=561bc012";
 
 const Homepage = () => {
   const [theMovies, setTheMovies] = useState([]);
