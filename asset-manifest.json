@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/moviesphere/static/css/main.0e1488bc.css",
+    "main.js": "/moviesphere/static/js/main.1e13bcc5.js",
+    "index.html": "/moviesphere/index.html",
+    "static/media/search.svg": "/moviesphere/static/media/search.981b582ea232c3cb047eca919deaf9e8.svg",
+    "main.0e1488bc.css.map": "/moviesphere/static/css/main.0e1488bc.css.map",
+    "main.1e13bcc5.js.map": "/moviesphere/static/js/main.1e13bcc5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e1488bc.css",
+    "static/js/main.1e13bcc5.js"
+  ]
+}
