@@ -3,17 +3,15 @@ import { useState, useEffect } from "react";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
 
-const API_URL = "https://www.omdbapi.com?apikey=561bc012";
-
 const Homepage = () => {
   const [theMovies, setTheMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchMovies = async (title) => {
     try {
-      // Force HTTPS by replacing http with https in case of any redirects
+      // Use explicit HTTPS URL
       const response = await fetch(
-        `${API_URL.replace("http:", "https:")}&s=${title}`
+        `https://www.omdbapi.com/?apikey=561bc012&s=${title}`
       );
       const data = await response.json();
       setTheMovies(data.Search || []);
