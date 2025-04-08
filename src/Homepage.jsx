@@ -11,7 +11,10 @@ const Homepage = () => {
 
   const searchMovies = async (title) => {
     try {
-      const response = await fetch(`${API_URL}&s=${title}`);
+      // Force HTTPS by replacing http with https in case of any redirects
+      const response = await fetch(
+        `${API_URL.replace("http:", "https:")}&s=${title}`
+      );
       const data = await response.json();
       setTheMovies(data.Search || []);
     } catch (error) {
