@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
 
-const API_URL = "https://www.omdbapi.com/?apikey=561bc012";
+const API_URL = "https://www.omdbapi.com?apikey=561bc012";
 
 const Homepage = () => {
   const [theMovies, setTheMovies] = useState([]);
@@ -13,12 +13,7 @@ const Homepage = () => {
     try {
       const response = await fetch(`${API_URL}&s=${title}`);
       const data = await response.json();
-
-      if (data.Response === "True") {
-        setTheMovies(data.Search);
-      } else {
-        setTheMovies([]);
-      }
+      setTheMovies(data.Search || []);
     } catch (error) {
       console.error("Error fetching movies:", error);
       setTheMovies([]);
@@ -38,14 +33,23 @@ const Homepage = () => {
           placeholder="Search for movies"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter" && searchTerm.trim() !== "") {
+              searchMovies(searchTerm);
+            }
+          }}
         />
         <img
-          src={SearchIcon}
+          src={SearchIcon || "/placeholder.svg"}
           alt="search"
-          onClick={() => searchMovies(searchTerm)}
+          onClick={() => {
+            if (searchTerm && searchTerm.trim() !== "") {
+              searchMovies(searchTerm);
+            }
+          }}
         />
       </div>
-      {theMovies.length > 0 ? (
+      {theMovies?.length > 0 ? (
         <div className="container">
           {theMovies.map((movie) => (
             <MovieCard key={movie.imdbID} movie={movie} />
