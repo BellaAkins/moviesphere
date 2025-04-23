@@ -1,7 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
+
+const API_URL =
+  "https://api.themoviedb.org/3/search/movie?api_key=586efbcda4d7a32f6756e6335a366512";
 
 const Homepage = () => {
   const [theMovies, setTheMovies] = useState([]);
@@ -9,12 +11,13 @@ const Homepage = () => {
 
   const searchMovies = async (title) => {
     try {
-      // Use explicit HTTPS URL
-      const response = await fetch(
-        `https://www.omdbapi.com/?apikey=561bc012&s=${title}`
-      );
+      const response = await fetch(`${API_URL}&query=${title}`);
       const data = await response.json();
-      setTheMovies(data.Search || []);
+      if (data.results) {
+        setTheMovies(data.results);
+      } else {
+        setTheMovies([]);
+      }
     } catch (error) {
       console.error("Error fetching movies:", error);
       setTheMovies([]);
@@ -53,7 +56,7 @@ const Homepage = () => {
       {theMovies?.length > 0 ? (
         <div className="container">
           {theMovies.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       ) : (
